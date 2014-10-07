@@ -1,11 +1,11 @@
 #include "common.h"
-// #include "soap.h"
+#include "soap.h"
 #include "builtin.h"
 
 
 struct builtin_cmd cmds[]={
-	// {"list",cmd_list},
-	// {"calc",cmd_calc}
+	{"list",cmd_list},
+	{"calc",cmd_calc}
 };
 
 int run_builtin(int argc,const char **argv){
@@ -30,7 +30,5 @@ int main(int argc,char **av){
 
 	argv++;
 
-	run_builtin(argc-1,argv);
-
-	return 0;
+	return run_builtin(argc-1,argv);
 }

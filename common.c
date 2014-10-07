@@ -19,7 +19,7 @@ char *strppad(char *str,int total,const char *padding){
 	return str;
 }
 
-int start_with(char *str,char *prefix){
+int start_with(const char *str,char *prefix){
 	int len=strlen(str),pre_len=strlen(prefix);
 	if(len<pre_len) return 0;
 	for( ; ; str++,prefix++){
@@ -31,5 +31,33 @@ int start_with(char *str,char *prefix){
 int end_with(const char *str,const char *suffix){
 	int len=strlen(str) ,suff_len=strlen(suffix);
 	if(suff_len>len) return 0;
-	return !strcmp(str+suff_len,suffix);
+	return !strcmp(str+len-suff_len,suffix);
+}
+
+char *strchl(const char *str,const char ch){
+	int len=strlen(str);
+	char *dest=(char*)malloc(sizeof(char)*len);
+	char *p=dest;
+	while(*str){
+		if(*str==ch) return p;
+		*dest=*str;
+		dest++;
+		str++;
+	}
+	return p;
+}
+
+int soap_strlen(const char *str){
+	int len=0;
+	while(*str){
+		char tmp[3]={""};
+		strncpy(tmp,str,3);
+		printf("%s\t%lu\t %lu\n",tmp,sizeof(tmp), strlen(tmp));
+		if(strlen(tmp)==1 && strcmp("?",tmp)) len++;
+		else len+=strlen(tmp)/strlen(tmp)*2;
+		str++;
+		str++;
+		str++;
+	}
+	return len;
 }
